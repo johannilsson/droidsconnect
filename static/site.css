@@ -1,0 +1,38 @@
+html, body { margin:0; padding:0; border:0; }
+body { background:#fff; font-family: Arial, Helvetica, sans-serif; font-size:62.5%; color:#333333; }
+h1, h2, h3, h4, h5, .title { font-family: Georgia, "Times New Roman", Times, serif; text-align: left; font-weight: normal; }
+
+#wrapper { font-size:1.4em; width:80%; max-width:1000px; min-width:720px; margin:0 auto; padding:0; }
+#content { width:78%; float:left; }
+#header, #footer { clear:both; }
+
+a { color:#555555; text-decoration:none; background-color:transparent; border:none; border-bottom:#999 1px dotted; }
+a:hover { color:#919f20; }
+
+
+form ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+form ul li {
+    padding: 0.5em 0;
+}
+
+textarea {
+    width: 500px;
+    height: 400px;
+}
+
+ul.errorlist {
+
+}
+ul.errorlist li {
+    color: red;
+}
+
+
+form ul label {
+    font-weight: bold;
+    display: block;
+}

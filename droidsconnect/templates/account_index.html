@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}My account{% endblock %}
+
+{% block content %}
+
+<h2>My projects</h2>
+{% if project_list %}
+    <ul>
+    {% for project in project_list %}
+        <li><a href="{% url droidsconnect.project.views.detail project.key %}">{{ project.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No projects yet.</p>
+{% endif %}
+
+
+{% endblock %}

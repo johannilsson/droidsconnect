@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Create project{% endblock %}
+
+{% block content %}
+
+<h2>Create project</h2>
+
+<form method="post" action="{% url droidsconnect.project.views.create %}">
+<ul>
+{{ form.as_ul }}
+    <li>
+        <input type="submit" value="Create">
+    </li>
+</ul>
+</form>
+
+{% endblock %}
