@@ -8,7 +8,10 @@
 {% if project_list %}
     <ul>
     {% for project in project_list %}
-        <li><a href="{% url droidsconnect.project.views.detail project.key %}">{{ project.title }}</a></li>
+        <li>
+            <a href="{% url droidsconnect.project.views.detail project.key %}">{{ project.title }}</a>
+            - <a href="{% url droidsconnect.project.views.edit project.key %}">Edit</a>
+        </li>
     {% endfor %}
     </ul>
 {% else %}
