@@ -1,4 +1,6 @@
 from django import newforms as forms
+from google.appengine.ext.db import djangoforms
+from droidsconnect.project.models import Project
 
 class ProjectForm(forms.Form):
     title = forms.CharField()
@@ -11,3 +13,7 @@ class ProjectForm(forms.Form):
     project_url = forms.URLField(required=False)
     package_name = forms.CharField(required=False, help_text="The package name if the application is available on Android Market")
 
+class ProjectModelForm(djangoforms.ModelForm):
+  class Meta:
+    model = Project
+    exclude = ['owner', 'created_at']
