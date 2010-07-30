@@ -1,4 +1,6 @@
 from django import newforms as forms
+from google.appengine.ext.db import djangoforms
+from droidsconnect.project.models import Project
 
 class ProjectForm(forms.Form):
     title = forms.CharField(label="Project Title")
@@ -18,3 +20,7 @@ class ProjectForm(forms.Form):
     project_url = forms.URLField(required=False, label="Official website")
     package_name = forms.CharField(required=False, label="Package name (Market QR code)")
 
+class ProjectModelForm(djangoforms.ModelForm):
+  class Meta:
+    model = Project
+    exclude = ['owner', 'created_at']

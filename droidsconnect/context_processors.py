@@ -1,5 +1,7 @@
-from google.appengine.api import users
 
 def get_user(request):
-    user = users.get_current_user()
-    return {'user': user}
+    """
+    Assigns the 'user' value to templates. The user is added to the request via the
+    GoogleAuthenticationMiddleware middleware.
+    """
+    return {'user': request.user}

@@ -1,9 +1,6 @@
-from google.appengine.ext import db
-from droidsconnect.account.models import Account
-
 class Project(db.Model):
-    owner = db.UserProperty()
-    #owner = db.ReferenceProperty(Account)
+    #owner = db.UserProperty()
+    owner = db.ReferenceProperty(Account)
     created_at = db.DateTimeProperty(auto_now_add=True)
     title = db.StringProperty(required=True)
     description = db.TextProperty(required=True)
@@ -21,4 +18,3 @@ class Project(db.Model):
     vcs_url = db.LinkProperty()
     project_url = db.LinkProperty()
     package_name = db.StringProperty()
-    
