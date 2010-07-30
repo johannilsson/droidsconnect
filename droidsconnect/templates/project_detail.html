@@ -4,7 +4,110 @@
 
 {% block content %}
 
-<h2>{{ project.title }} by {{ project.owner.nickname }}</h2>
-{{ description }}
+
+<div id="project">
+    <div id="content_header">
+        <ul id="project_top">
+            <li class="project">
+                <a href="project.html"><img src="/static/img/default_icon.png" alt="Icon" class="icon" /></a>
+                
+                <span class="info" style="float: left">
+                    <h2 class="title"><a href="project.html">{{ project.title }}</a></h2>
+                    <p><strong>{{ project.type }}</strong> by {{ project.owner.nickname }}</p>
+                </span>	
+                
+                <span class="roles">
+                    {% if project.needs_developer %}<img src="/static/img/project_programmer.png" class="role" alt="programmer" title="Looking for a programmer" />{% endif %}
+                    {% if project.needs_artist %}<img src="/static/img/project_artist.png" class="role" alt="artist" title="Looking for a graphics artist" />{% endif %}
+                    {% if project.needs_copyrwriter %}<img src="/static/img/project_artist.png" class="role" alt="copywriter" title="Looking for a copywriter" />{% endif %}
+                </span>
+                
+                <div style="clear: both;"></div>
+            </li>
+        </ul>
+        
+        <div class="clear"></div>
+    </div>
+    
+    <div id="project_details">
+        <div id="description">
+            {{ description }}
+        </div>
+        
+        <hr />
+        
+        <!-- Links -->
+        <div id="links">
+            {% if project.package_name %}<img src="/static/img/project_qr.png" alt="qr code" />{% endif %}
+            
+            <p>
+                {% if project.project_url %}<a href="{% url project.project_url %}" target="_blank">Official website</a><br/>{% endif %}
+            
+                {% if project.vcs_url %}<a href="{% url project.project_url %}" target="_blank">VCS Link</a>{% endif %}
+            </p>
+        </div>
+        
+        <!-- Looking for -->
+        <div id="looking_for">
+            {% if project.needs_artist %}<div class="looking_for_artist">
+                <h2>Looking for a graphics artist to:</h2>
+                
+               {{ looking_for_artist_list }}
+            </div>{% endif %}
+            
+            {% if project.needs_developer and project.needs_artist %}<hr />{% endif %}
+            
+            {% if project.needs_developer  %}<div class="looking_for_programmer">
+                <h2>Looking for a programmer to:</h2>
+                
+               {{ looking_for_developer_list }}
+            </div>{% endif %}
+            
+            {% if project.needs_artist or project.needs_developer %}<hr />{% endif %}
+            
+            {% if project.needs_copywriter %}<div class="looking_for_copywriter">
+                <h2>Looking for a copywriter to:</h2>
+                
+               {{ looking_for_copywriter_list }}
+            </div>{% endif %}
+            
+            <!--<hr />
+            
+            <div class="looking_for_copywriter">
+                    <h2>
+                            <input type="checkbox" name="looking_for_copywriter" id="looking_for_copywriter" />
+                            Looking for a copywriter artist to:
+                    </h2>
+                    
+                    <p id="project_copywriter" class="inplace">
+                            <label for="project_copywriter_description">List of things you'd like the copywriter to do.</label>
+                            <textarea name="project_copywriter_description" id="project_copywriter_description" rows="2"></textarea>
+                    </p>
+            </div>-->
+        </div>
+        <div class="clear"></div>
+        
+        <hr />
+        
+        <div id="contact">
+            <h1>Sounds like your cup of tea? Great!</h1>
+            <h2>Use the form below to contact {{ project.owner.nickname }}.</h2>
+            
+            <form>
+                <p>
+                    <label for="message_text">Message will be sent as an e-mail. Good luck!</label>
+                    <textarea name="message_text" id="message_text" rows="4"></textarea></br>
+                    Captcha <input type="text" />
+                </p>
+                
+                <a href=""><img src="/static/img/button_make_connection.png" id="contact_button" alt="Make connection!" /></a>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--<h2>{{ project.title }} by {{ project.owner.nickname }}</h2>-->
+<!--{{ description }}-->
 
 {% endblock %}

@@ -1,13 +1,20 @@
 from django import newforms as forms
 
 class ProjectForm(forms.Form):
-    title = forms.CharField()
+    title = forms.CharField(label="Project Title")
     description = forms.CharField(widget=forms.Textarea, help_text="Markdown syntax")
-    type = forms.ChoiceField(choices=[["App", "App"], ["Game", "Game"]])
-    needs_developer = forms.BooleanField(required=False)
-    needs_artist = forms.BooleanField(required=False)
-    needs_copywriter = forms.BooleanField(required=False)
-    vcs_url = forms.URLField(required=False, help_text="Eg: GitHub, bitbucket, Google Code etc")
-    project_url = forms.URLField(required=False)
-    package_name = forms.CharField(required=False, help_text="The package name if the application is available on Android Market")
+    type = forms.ChoiceField(choices=[["App", "an app"], ["Game", "a game"]])
+    
+    needs_developer = forms.BooleanField(required=False, label="Looking for a developer to:")
+    needs_developer_list = forms.CharField(widget=forms.Textarea, required=False, label="List of things you'd like the programmer to do.")
+    
+    needs_artist = forms.BooleanField(required=False, label="Looking for a graphics artist to:")
+    needs_artist_list = forms.CharField(widget=forms.Textarea, required=False, label="List of things you'd like the artist to do.")
+    
+    needs_copywriter = forms.BooleanField(required=False, label="Looking for a copywriter to:")
+    needs_copywriter_list = forms.CharField(widget=forms.Textarea, required=False, label="List of things you'd like the copywriter to do.")
+    
+    vcs_url = forms.URLField(required=False, label="VCS Link (Eg: GitHub, Google Code etc.)")
+    project_url = forms.URLField(required=False, label="Official website")
+    package_name = forms.CharField(required=False, label="Package name (Market QR code)")
 

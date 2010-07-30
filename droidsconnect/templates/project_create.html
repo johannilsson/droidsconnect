@@ -4,15 +4,179 @@
 
 {% block content %}
 
-<h2>Create project</h2>
+<div id="add_project">
+    <div id="project">
+        <form method="post" action="{% url droidsconnect.project.views.create %}">
+                <div id="content_header">
+                    <div class="top">
+                        <p class="project_title inplace">
+                            <a href="#"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>
+                            
+                            <!--<label for="project_title">Project title</label>-->
+                            <!--<input type="text" name="project_title" value="" id="project_title" />-->
+                            
+                            {{ form.title.label_tag }}
+                            {{ form.title }}
+                            
+                            <br/>
+                            
+                            Is
+                            <!--<select name="project_type" id="project_type">-->
+                            <!--    <option>Select type</option>-->
+                            <!--    <option>an app</option>-->
+                            <!--    <option>a game</option>-->
+                            <!--</select>-->
+                            
+                            {{ form.type }}
+                            by {{ user.nickname }}
+                        </p>
+                    </div>
+                    
+                    <div class="clear"></div>
+                </div>
+                    
+                <div id="add_project_details">
+                    <!-- Description -->
+                    <p id="description" class="inplace">
+                        <!--<label for="project_description">Describe your project (but not what you want help with)</label>-->
+                        <!--<textarea name="project_description" id="project_description" rows="5"></textarea>-->
+                        
+                        {{ form.description.label_tag }}
+                        {{ form.description }}
+                    </p>
+                    
+                    <!-- Syntax guide -->
+                    <div id="syntax_guide">
+                        <a class="syntax_guide_link">Syntax guide</a>
+                        <div class="syntax_guide">
+                            <hr />
+                            
+                            <ul>
+                                <li><strong>[*]</strong> - Unordered list <i>(ex. [*]First entry [*]Second entry)</i></li>
+                                <li><strong>[url]</strong> - Link <i>(ex. [url="http://www.yourlink.com"]Link text [/url])</i></li>
+                                <li><strong>[img]</strong> - Image <i>(ex. [img="http://www.yourlink.com/image.jpg"])</i></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Links -->
+                    <div id="links">
+                        <img src="/static/img/project_qr.png" alt="qr code" />
+                        
+                        <p id="package_name">
+                            <!--<label for="project_package_name">Package name (Market lookup (QR code))</label>-->
+                            <!--<input type="text" name="project_package_name" id="project_package_name" value="" />-->
+                            
+                            {{ form.package_name.label_tag }}
+                            {{ form.package_name }}
+                        </p>
+                        
+                        <p id="web_link">
+                            <!--<label for="project_web_link">Official website</label>-->
+                            <!--<input type="text" name="project_web_link" id="project_web_link" value="" />-->
+                            
+                            {{ form.project_url.label_tag }}
+                            {{ form.project_url }}
+                        </p>
+                        
+                        <p id="vcs_link">
+                            <!--<label for="project_vcs_link">VCS Link (ie. Github)</label>-->
+                            <!--<input type="text" name="project_vcs_link" id="project_vcs_link" value="" />-->
+                            
+                            {{ form.vcs_url.label_tag }}
+                            {{ form.vcs_url }}
+                        </p>
+                    </div>
+                    
+                    <!-- Looking for -->
+                    <div id="looking_for">
+                        <div class="looking_for_artist">
+                            <div class="looking_for_checkbox"
+                                    <!--<input type="checkbox" name="looking_for_artist" id="looking_for_artist" />-->
+                                    <!--Looking for a graphics artist to:-->
+                                    
+                                    {{ form.needs_artist }}
+                                    {{ form.needs_artist.label_tag }}
+                            </div>
+                            
+                            <p id="project_artist" class="inplace">
+                                    <!--<label for="project_artist_description">List of things you'd like the graphic artist to do.</label>-->
+                                    <!--<textarea name="project_artist_description" id="project_artist_description" rows="2"></textarea>-->
+                                    
+                                    {{ form.needs_artist_list.label_tag }}
+                                    {{ form.needs_artist_list }}
+                            </p>
+                        </div>
+                        
+                        <hr />
+                        
+                        <div class="looking_for_programmer">
+                            <div class="looking_for_checkbox"
+                                    <!--<input type="checkbox" name="looking_for_artist" id="looking_for_artist" />-->
+                                    <!--Looking for a graphics artist to:-->
+                                    
+                                    {{ form.needs_developer }}
+                                    {{ form.needs_developer.label_tag }}
+                            </div>
+                            
+                            <p id="project_artist" class="inplace">
+                                    <!--<label for="project_artist_description">List of things you'd like the graphic artist to do.</label>-->
+                                    <!--<textarea name="project_artist_description" id="project_artist_description" rows="2"></textarea>-->
+                                    
+                                    {{ form.needs_developer_list.label_tag }}
+                                    {{ form.needs_developer_list }}
+                            </p>
+                        </div>
+                        
+                        <hr />
+                        
+                        <div class="looking_for_copywriter">
+                            <div class="looking_for_checkbox"
+                                    <!--<input type="checkbox" name="looking_for_artist" id="looking_for_artist" />-->
+                                    <!--Looking for a graphics artist to:-->
+                                    
+                                    {{ form.needs_copywriter }}
+                                    {{ form.needs_copywriter.label_tag }}
+                            </div>
+                            
+                            <p id="project_artist" class="inplace">
+                                    <!--<label for="project_artist_description">List of things you'd like the graphic artist to do.</label>-->
+                                    <!--<textarea name="project_artist_description" id="project_artist_description" rows="2"></textarea>-->
+                                    
+                                    {{ form.needs_copywriter_list.label_tag }}
+                                    {{ form.needs_copywriter_list }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    
+                    <hr />
+                    
+                    <div id="add_project_buttons">
+                        
+                        <h2>All done? Awesome!</h2>
+                        <!--<input type="submit" id="submit_button" value="Submit" />-->
+                        <a href="{% url droidsconnect.project.views.create %}">
+                            <img src="/static/img/button_add_project.png" alt="Add project" />
+                        </a>
+                    </div>
+                </div>
 
-<form method="post" action="{% url droidsconnect.project.views.create %}">
-<ul>
-{{ form.as_ul }}
-    <li>
-        <input type="submit" value="Create">
-    </li>
-</ul>
-</form>
+        </form>
+    </div>
+</div>
+
+
+
+<!--<h2>Create project</h2>-->
+<!---->
+<!--<form method="post" action="{% url droidsconnect.project.views.create %}">-->
+<!--<ul>-->
+<!--{{ form.as_ul }}-->
+<!--    <li>-->
+<!--        <input type="submit" value="Create">-->
+<!--    </li>-->
+<!--</ul>-->
+<!--</form>-->
 
 {% endblock %}

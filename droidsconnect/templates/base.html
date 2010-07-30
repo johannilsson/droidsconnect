@@ -2,15 +2,91 @@
 <html>
     <head>
         <title>
-            {%block title%}{%endblock%}
+            Droids Connect - {%block title%}{%endblock%}
         </title>
+        
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" /> 
+
         <style type="text/css">
-            @import "/static/site.css";
+            @import "/static/style.css";
         </style>
+        
+        <script type="text/javascript" src="/static/jquery-1.4.2.min.js"></script>
+        
+        <script type="text/javascript" src="/static/forms.js"></script>
+        <script type="text/javascript" src="/static/dropdown.js"></script>
+        
+        <!-- Elastic textareas by Jan Järfalk (http://www.unwrongest.com/projects/elastic/) -->
+        <script type="text/javascript" src="/static/elastic.js"></script>
+        
+        <script type="text/javascript" charset="utf-8"> 
+            $(document).ready(function(){				
+                    $('textarea').elastic();
+            });	
+        </script>
+        
+        <!-- InField input labels by Doug Neiner (http://fuelyourcoding.com/scripts/infield/) -->
+        <script type="text/javascript" src="/static/infieldlabel.min.js"></script>
+        
+        <script type="text/javascript" charset="utf-8"> 
+            $(function(){ $("label").inFieldLabels(); });
+        </script>
+        
+        <!--[if lte IE 6]>
+        <style type="text/css" media="screen">
+            form label {
+                            background: #fff;
+            }
+        </style>
+        <![endif]-->
+        
+        <!--<style type="text/css">
+            @import "/static/site.css";
+        </style>-->
     </head>
     <body>
-        <div id="wrapper">
-            <div id="header">
+        <div id="header">
+            <div id="header_content">
+                
+                <a href="/" ><img src="/static/img/logo.png" alt="Droids Connect" id="logo" /></a>
+                
+                
+                <div id="user">
+                    <div id="user_content">
+                            {% if user %}<p>Hello <strong><a href="{% url droidsconnect.account.views.index %}">{{ user.nickname }}</a></strong>!</p>
+                            <a href="{% url droidsconnect.auth.views.logout %}"><img src="/static/img/button_sign-out.png" alt="Sign out" class="sign-in" ></a>
+                            
+                            {% else %}<p>Howdy <strong>Stranger</strong>!</p>
+                            <a href="{% url droidsconnect.auth.views.login %}"><img src="/static/img/button_sign-in.png" alt="Sign in" class="sign-in" ></a>{% endif %}
+                            
+                            <div class="clear"></div>
+                    </div>					
+                </div>
+                
+                <div id="menu">
+                    <ul>
+                            {%if index %}<li class="active">{% else %}<li>{% endif %}
+                                <a href="{% url droidsconnect.project.views.index %}"><img src="/static/img/icon_browse.png" alt="Browse" />Browse projects</a>
+                            </li>
+                            
+                            {%if create %}<li class="active">{% else %}<li>{% endif %}
+                                <a href="{% url droidsconnect.project.views.create %}"><img src="/static/img/icon_add.png" alt="Add" />Add new project</a>
+                            </li>
+                    </ul>
+                </div>
+                
+                <div id="right_menu">
+                    <ul>
+                            <li><a href="#" onclick="UserVoice.Popin.show(uservoiceOptions); return false;">Vote for new features</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="https://twitter.com/droidsconnect" target="_blank">Follow on Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div id="content">
+            <!--<div id="header">
                 <h1><a href="/">Droids Connect</a></h1>
                 <ul>
                     <li><a href="{% url droidsconnect.project.views.create %}">Create project</a></li>
@@ -18,11 +94,20 @@
                     (<a href="{% url droidsconnect.account.views.index %}">{{ user.nickname }}</a>)
                     {% else %}<a href="{% url droidsconnect.auth.views.login %}">Login</a>{% endif %}</li>
                 </ul>
-            </div>
-            <div id="content">
-                {%block content%}{%endblock%}
-            </div>
-
+            </div>-->
+            
+            {%block content%}{%endblock%}
         </div>
+        
+        <div id="content_footer"></div>
+		
+		
+            <div id="footer">
+                <a href=""><img src="/static/img/footer_os.png" alt="Open Source" style="float:left;" /></a>
+                <p><strong>Licenses does not apply to user published content, please respect this!</strong></p>
+                <a href=""><img src="/static/img/footer_cc.png" alt="Creative Commons" style="padding-top: 20px; float: right;" /></a>
+                
+                <div style="clear: both;"></div>
+            </div>
     </body>
 </html>
