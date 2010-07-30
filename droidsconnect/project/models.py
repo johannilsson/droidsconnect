@@ -1,3 +1,6 @@
+from google.appengine.ext import db
+from droidsconnect.account.models import Account
+
 class Project(db.Model):
     #owner = db.UserProperty()
     owner = db.ReferenceProperty(Account)
@@ -18,3 +21,4 @@ class Project(db.Model):
     vcs_url = db.LinkProperty()
     project_url = db.LinkProperty()
     package_name = db.StringProperty()
+
