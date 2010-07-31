@@ -1,13 +1,15 @@
 from django import shortcuts
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import Context, loader, RequestContext
-from google.appengine.api import users
 from django.core.urlresolvers import reverse
+from google.appengine.api import users
+from google.appengine.ext import db
+from google.appengine.api import images
 from droidsconnect.project.forms import ProjectForm, ProjectModelForm
 from droidsconnect.project.models import Project
 import logging
-from google.appengine.ext import db
 import markdown
+import django.http
 
 def index(request):
     #q = db.GqlQuery("SELECT * FROM Project")
@@ -116,3 +118,45 @@ def detail(request, project_id):
 
     return shortcuts.render_to_response('project_detail.html', template_values,
                            context_instance=RequestContext(request))
+
+def icon_create(request, project_id):
+    # TODO: Verify that we're logged in...
+
+    try:
+        key = db.Key(encoded=project_id)
+        q = db.GqlQuery("SELECT * FROM Project " +
+                    "WHERE __key__ = :1", key)
+        project = q.get()
+    except:
+        raise Http404
+
+    if request.method == 'POST':
+        uploaded_icon = request.FILES['icon']
+        # TODO: Check for exceptions here...
+        icon = images.resize(uploaded_icon['content'], 72, 72)
+        project.icon = db.Blob(icon)
+        project.put()
+        # TODO: Add redirect here to edit project.
+
+    template_values = {
+        'project': project,
+    }
+
+    return shortcuts.render_to_response('project_icon_create.html', template_values,
+                           context_instance=RequestContext(request))
+
+def icon(request, project_id):
+    try:
+        key = db.Key(encoded=project_id)
+        q = db.GqlQuery("SELECT * FROM Project " +
+                    "WHERE __key__ = :1", key)
+        project = q.get()
+    except:
+        raise Http404
+
+    if project.icon:
+        response = HttpResponse(project.icon, mimetype='image/png')
+    else:
+        raise Http404
+
+    return response

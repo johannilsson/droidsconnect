@@ -8,7 +8,15 @@
 {% if project_list %}
     <ul>
     {% for project in project_list %}
-        <li><a href="{% url droidsconnect.project.views.detail project.key %}">{{ project.title }}</a></li>
+        <li>
+        {% if project.icon %}
+            <img src="{% url droidsconnect.project.views.icon project.key %}" alt="">
+        {% else %}
+            <img src="/static/img/default_icon.png" alt="">
+        {% endif %}
+
+
+        <a href="{% url droidsconnect.project.views.detail project.key %}">{{ project.title }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

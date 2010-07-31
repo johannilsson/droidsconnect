@@ -6,6 +6,8 @@
 
 <h2>Edit project</h2>
 
+<a href="{% url droidsconnect.project.views.icon_create project.key %}"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>
+
 <form method="post" action="{% url droidsconnect.project.views.edit project.key %}">
 <ul>
 {{ form.as_ul }}

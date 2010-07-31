@@ -23,4 +23,4 @@ class ProjectForm(forms.Form):
 class ProjectModelForm(djangoforms.ModelForm):
   class Meta:
     model = Project
-    exclude = ['owner', 'created_at']
+    exclude = ['owner', 'created_at', 'icon']
