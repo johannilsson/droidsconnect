@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.api import images
-from droidsconnect.project.forms import ProjectModelForm
+from droidsconnect.project.forms import ProjectForm
 from droidsconnect.project.models import Project
 import logging
 import markdown
@@ -31,7 +31,7 @@ def create(request):
 
     if request.method == 'POST':
         #form = ProjectForm(request.POST)
-        form = ProjectModelForm(data=request.POST)
+        form = ProjectForm(data=request.POST)
         if form.is_valid():
             try:
                 project = form.save(commit=False)
@@ -59,7 +59,7 @@ def create(request):
             logging.info("not valid...")
 
     else:
-        form = ProjectModelForm()
+        form = ProjectForm()
 
     template_values = {
         'form': form,
@@ -81,7 +81,7 @@ def edit(request, project_id):
         if project is None:
             raise Http404
 
-    form = ProjectModelForm(data=request.POST or None, instance=project)
+    form = ProjectForm(data=request.POST or None, instance=project)
     if request.method == 'POST':
         if form.is_valid():
             try:
