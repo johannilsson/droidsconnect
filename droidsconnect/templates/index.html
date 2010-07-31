@@ -38,9 +38,9 @@
     <li class="project">
         <a href="{% url droidsconnect.project.views.detail project.key %}">
         {% if project.icon %}
-            <img src="{% url droidsconnect.project.views.icon project.key %}" alt="">
+            <img src="{% url droidsconnect.project.views.icon project.key %}" alt="" class="icon">
         {% else %}
-            <img src="/static/img/default_icon.png" alt="">
+            <img src="/static/img/default_icon.png" alt="" class="icon">
         {% endif %}
         </a>
 
