@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from google.appengine.api import users
 from google.appengine.ext import db
 from google.appengine.api import images
-from droidsconnect.project.forms import ProjectForm, ProjectModelForm
+from droidsconnect.project.forms import ProjectModelForm
 from droidsconnect.project.models import Project
 import logging
 import markdown
@@ -30,22 +30,23 @@ def create(request):
             reverse('droidsconnect.project.views.create')))
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
-
+        #form = ProjectForm(request.POST)
+        form = ProjectModelForm(data=request.POST)
         if form.is_valid():
-            project = Project(title=form.clean_data['title'],
-                          type=form.clean_data['type'],
-                          description=form.clean_data['description'],
-                          owner=request.user)
-            project.needs_developer = form.clean_data['needs_developer']
-            project.needs_artist = form.clean_data['needs_artist']
-            project.needs_copywriter = form.clean_data['needs_copywriter']
-            if form.clean_data['vcs_url'] != '':
-                project.vcs_url = form.clean_data['vcs_url']
-            if form.clean_data['project_url'] != '':
-                project.project_url = form.clean_data['project_url']
-            if form.clean_data['package_name'] != '':
-                project.package_name = form.clean_data['package_name']
+            try:
+                project = form.save(commit=False)
+                project.owner = request.user
+            except ValueError, err:
+                # TODO: Handle errors...
+                pass
+            else:
+                project.put()
+
+            if request.FILES:
+                uploaded_icon = request.FILES['icon']
+                # TODO: Check for exceptions here...
+                icon = images.resize(uploaded_icon['content'], 72, 72)
+                project.icon = db.Blob(icon)
 
             project.put()
 
@@ -58,7 +59,7 @@ def create(request):
             logging.info("not valid...")
 
     else:
-        form = ProjectForm()
+        form = ProjectModelForm()
 
     template_values = {
         'form': form,
@@ -87,8 +88,14 @@ def edit(request, project_id):
                 project = form.save(commit=False)
             except ValueError, err:
                 pass
-            else:
-                project.put()
+
+            if request.FILES:
+                uploaded_icon = request.FILES['icon']
+                # TODO: Check for exceptions here...
+                icon = images.resize(uploaded_icon['content'], 72, 72)
+                project.icon = db.Blob(icon)
+
+            project.put()
 
     template_values = {
         'form': form,
@@ -117,32 +124,6 @@ def detail(request, project_id):
     }
 
     return shortcuts.render_to_response('project_detail.html', template_values,
-                           context_instance=RequestContext(request))
-
-def icon_create(request, project_id):
-    # TODO: Verify that we're logged in...
-
-    try:
-        key = db.Key(encoded=project_id)
-        q = db.GqlQuery("SELECT * FROM Project " +
-                    "WHERE __key__ = :1", key)
-        project = q.get()
-    except:
-        raise Http404
-
-    if request.method == 'POST':
-        uploaded_icon = request.FILES['icon']
-        # TODO: Check for exceptions here...
-        icon = images.resize(uploaded_icon['content'], 72, 72)
-        project.icon = db.Blob(icon)
-        project.put()
-        # TODO: Add redirect here to edit project.
-
-    template_values = {
-        'project': project,
-    }
-
-    return shortcuts.render_to_response('project_icon_create.html', template_values,
                            context_instance=RequestContext(request))
 
 def icon(request, project_id):

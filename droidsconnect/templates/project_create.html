@@ -6,11 +6,12 @@
 
 <div id="add_project">
     <div id="project">
-        <form method="post" action="{% url droidsconnect.project.views.create %}">
+        <form method="post" action="{% url droidsconnect.project.views.create %}" enctype="multipart/form-data">
                 <div id="content_header">
                     <div class="top">
+
                         <p class="project_title inplace {% if form.title.errors %}error{% endif %}">
-                            <a href="#"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>
+                            <!--<a href="#"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>-->
                             
                             <!--<label for="project_title">Project title</label>-->
                             <!--<input type="text" name="project_title" value="" id="project_title" />-->
@@ -30,13 +31,15 @@
                             {{ form.type }}
                             by {{ user.nickname }}
                         </p>
-                        
                         {{ form.title.errors }}
+
+                        <p>
+                            <label>Icon:</label>
+                            <input type="file" name="icon"/>
+                        </p>
                     </div>
-                    
                     <div class="clear"></div>
                 </div>
-                    
                 <div id="add_project_details">
                     <!-- Description -->
                     {{ form.description.errors }}
@@ -50,23 +53,23 @@
                     
                     <!-- Syntax guide -->
                     <div id="syntax_guide">
-                        <a class="syntax_guide_link">Syntax guide</a>
+                        <a class="syntax_guide_link">Markdown syntax.</a>
                         <div class="syntax_guide">
                             <hr />
-                            
                             <ul>
-                                <li><strong>[*]</strong> - Unordered list <i>(ex. [*]First entry [*]Second entry)</i></li>
-                                <li><strong>[url]</strong> - Link <i>(ex. [url="http://www.yourlink.com"]Link text [/url])</i></li>
-                                <li><strong>[img]</strong> - Image <i>(ex. [img="http://www.yourlink.com/image.jpg"])</i></li>
+                                <li><strong>Unordered list</strong> <i>* item 1</i></li>
+                                <li><strong>Link</strong> <i>An [example](http://url.com/ "Title")</i></li>
+                                <li><strong>Image</strong> <i>![alt text](/path/img.jpg "Title")</i></li>
                             </ul>
+                            <p><a href="http://daringfireball.net/projects/markdown/syntax">Full documentation</a></p>
                         </div>
                     </div>
                     
                     <!-- Links -->
                     <div id="links">
-                        <img src="/static/img/project_qr.png" alt="qr code" />
+                        <!--<img src="/static/img/project_qr.png" alt="qr code" />-->
                         
-                        <p id="package_name">
+                        <p>
                             <!--<label for="project_package_name">Package name (Market lookup (QR code))</label>-->
                             <!--<input type="text" name="project_package_name" id="project_package_name" value="" />-->
                             
@@ -74,7 +77,7 @@
                             {{ form.package_name }}
                         </p>
                         
-                        <p id="web_link">
+                        <p>
                             <!--<label for="project_web_link">Official website</label>-->
                             <!--<input type="text" name="project_web_link" id="project_web_link" value="" />-->
                             
@@ -82,7 +85,7 @@
                             {{ form.project_url }}
                         </p>
                         
-                        <p id="vcs_link">
+                        <p>
                             <!--<label for="project_vcs_link">VCS Link (ie. Github)</label>-->
                             <!--<input type="text" name="project_vcs_link" id="project_vcs_link" value="" />-->
                             

@@ -6,10 +6,20 @@
 
 <h2>Edit project</h2>
 
-<a href="{% url droidsconnect.project.views.icon_create project.key %}"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>
+<p>
+{% if project.icon %}
+    <img src="{% url droidsconnect.project.views.icon project.key %}" alt="" class="icon">
+{% else %}
+    <img src="/static/img/default_icon.png" alt="" class="icon">
+{% endif %}
+</p>
 
-<form method="post" action="{% url droidsconnect.project.views.edit project.key %}">
+<form method="post" action="{% url droidsconnect.project.views.edit project.key %}" enctype="multipart/form-data">
 <ul>
+    <li>
+        <label>Icon:</label>
+        <input type="file" name="icon"/>
+    </li>
 {{ form.as_ul }}
     <li>
         <input type="submit" value="Save">
