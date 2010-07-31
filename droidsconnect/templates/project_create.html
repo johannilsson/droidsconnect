@@ -9,8 +9,8 @@
         <form method="post" action="{% url droidsconnect.project.views.create %}">
                 <div id="content_header">
                     <div class="top">
-                        <p class="project_title inplace">
-                            <a href="{% url droidsconnect.project.views.icon_create project.key %}"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>
+                        <p class="project_title inplace {% if form.title.errors %}error{% endif %}">
+                            <a href="#"><img src="/static/img/upload_icon.png" alt="Icon" title="The default Android icon will be used if no icon is uploaded" class="icon" /></a>
                             
                             <!--<label for="project_title">Project title</label>-->
                             <!--<input type="text" name="project_title" value="" id="project_title" />-->
@@ -30,6 +30,8 @@
                             {{ form.type }}
                             by {{ user.nickname }}
                         </p>
+                        
+                        {{ form.title.errors }}
                     </div>
                     
                     <div class="clear"></div>
@@ -37,10 +39,11 @@
                     
                 <div id="add_project_details">
                     <!-- Description -->
-                    <p id="description" class="inplace">
+                    {{ form.description.errors }}
+                    
+                    <p id="description" class="inplace {% if form.description.errors %}error{% endif %}">
                         <!--<label for="project_description">Describe your project (but not what you want help with)</label>-->
                         <!--<textarea name="project_description" id="project_description" rows="5"></textarea>-->
-                        
                         {{ form.description.label_tag }}
                         {{ form.description }}
                     </p>
@@ -155,7 +158,7 @@
                     <div id="add_project_buttons">
                         
                         <h2>All done? Awesome!</h2>
-                        <input type="submit" id="submit_button" value="Submit" />
+                        <input type="submit" id="submit_button" value="" />
                         <!--<a href="{% url droidsconnect.project.views.create %}">-->
                         <!--    <img src="/static/img/button_add_project.png" alt="Add project" />-->
                         <!--</a>-->
@@ -166,17 +169,5 @@
     </div>
 </div>
 
-
-
-<!--<h2>Create project</h2>-->
-<!---->
-<!--<form method="post" action="{% url droidsconnect.project.views.create %}">-->
-<!--<ul>-->
-<!--{{ form.as_ul }}-->
-<!--    <li>-->
-<!--        <input type="submit" value="Create">-->
-<!--    </li>-->
-<!--</ul>-->
-<!--</form>-->
 
 {% endblock %}

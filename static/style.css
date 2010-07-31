@@ -485,7 +485,16 @@
 	}
 	
 	#contact #contact_button {
+		width: 214px;
+		height: 43px;
+		border: 0px;
 		margin: 10px 0px 0px 0px;
+		cursor: pointer;
+		/*float: right;*/
+		font-size: 18px;
+		background-image: url('img/button_make_connection.png');
+		background-color: transparent;
+		background-repeat: no-repeat;
 	}
 	
 	
@@ -553,6 +562,7 @@
 	
 	#project .looking_for_artist {
 		width: 630px;
+		min-height: 60px;
 		background-image: url('img/project_artist.png');
 		background-position: right center;
 		background-repeat: no-repeat;
@@ -564,12 +574,25 @@
 	
 	#project .looking_for_programmer {
 		width: 630px;
+		min-height: 60px;
 		background-image: url('img/project_programmer.png');
 		background-position: right center;
 		background-repeat: no-repeat;
 	}
 	
 	#add_project #project .looking_for_programmer {
+		width: 610px;
+	}
+	
+	#project .looking_for_copywriter {
+		width: 630px;
+		min-height: 60px;
+		background-image: url('img/project_artist.png');
+		background-position: right center;
+		background-repeat: no-repeat;
+	}
+	
+	#add_project #project .looking_for_copywriter {
 		width: 610px;
 	}
 	
@@ -630,14 +653,61 @@
 	}
 	
 	#add_project_buttons #submit_button {
+		width: 164px;
+		height: 43px;
+		border: 0px;
 		margin: 0px;
-		padding: 10px;
+		cursor: pointer;
 		/*float: right;*/
 		font-size: 18px;
+		background-image: url('img/button_add_project.png');
+		background-color: transparent;
+		background-repeat: no-repeat;
 	}
 	
 	#add_project_buttons .buttons {
 		text-align: right;
+	}
+	
+	#content_header ul.errorlist {
+		position: absolute;
+		left: 720px;
+		top: 42px;
+		z-index: 300;
+		padding: 7px;
+		margin: 0px;
+		
+		background-color: #c83137;
+		color: #fff;
+		
+		list-style: none;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-khtml-border-radius: 6px;
+		border-radius: 6px;
+	}
+	
+	#content_header ul.errorlist li {
+		text-shadow: 0px 1px 3px #3d0a0c;
+	}
+	
+	#add_project_details ul.errorlist {
+		margin: 0px 0px 10px 0px;
+		padding: 0px;
+	}
+	
+	#add_project_details ul.errorlist li {
+		background-color: #c83137;
+		color: #fff;
+		padding: 7px;
+		
+		list-style: none;
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-khtml-border-radius: 6px;
+		border-radius: 6px;
+		
+		text-shadow: 0px 1px 3px #3d0a0c;
 	}
 	
 	
@@ -732,6 +802,16 @@
 		font-size: 24px;
 		padding: 5px;
 		width: 580px;
+	}
+	
+	form p.project_title input {
+		font-size: 24px;
+		padding: 5px;
+		width: 580px;
+	}
+	
+	p.error label {
+		color: #c83137;
 	}
 	
 	p input {
