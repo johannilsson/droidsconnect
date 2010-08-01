@@ -91,11 +91,12 @@
         <div class="clear"></div>
         
         <hr />
-        
+
+
         <div id="contact">
             <h1>Sounds like your cup of tea? Great!</h1>
+            {% if user %}
             <h2>Use the form below to contact {{ project.owner.nickname }}.</h2>
-            
             <form method="post" action="{% url droidsconnect.project.views.contact project.key %}">
                 <p>
                     <label for="message_text">Message will be sent as an e-mail. Good luck!</label>
@@ -106,6 +107,9 @@
                 
                 <!--<a href=""><img src="/static/img/button_make_connection.png" id="contact_button" alt="Make connection!" /></a>-->
             </form>
+            {% else %}
+            <h2>You need to be logged in to connect to this project.</h2>
+            {% endif %}
         </div>
     </div>
 </div>
