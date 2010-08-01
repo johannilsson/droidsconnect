@@ -14,17 +14,16 @@
 {% endif %}
 </p>
 
-<form method="post" action="{% url droidsconnect.project.views.edit project.key %}" enctype="multipart/form-data">
-<ul>
-    <li>
+<form class="project-edit" method="post" action="{% url droidsconnect.project.views.edit project.key %}" enctype="multipart/form-data">
+    <p>
         <label>Icon:</label>
         <input type="file" name="icon"/>
-    </li>
-{{ form.as_ul }}
-    <li>
+    </p>
+{{ form.as_p }}
+    <p>
         <input type="submit" value="Save">
-    </li>
-</ul>
+    </p>
+
 </form>
 
 {% endblock %}

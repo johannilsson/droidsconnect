@@ -97,60 +97,30 @@
                     <!-- Looking for -->
                     <div id="looking_for">
                         <div class="looking_for_artist">
-                            <div class="looking_for_checkbox"
-                                    <!--<input type="checkbox" name="looking_for_artist" id="looking_for_artist" />-->
-                                    <!--Looking for a graphics artist to:-->
-                                    
-                                    {{ form.needs_artist }}
-                                    {{ form.needs_artist.label_tag }}
-                            </div>
-                            
-                            <p id="project_artist" class="inplace">
-                                    <!--<label for="project_artist_description">List of things you'd like the graphic artist to do.</label>-->
-                                    <!--<textarea name="project_artist_description" id="project_artist_description" rows="2"></textarea>-->
-                                    
-                                    {{ form.needs_artist_list.label_tag }}
-                                    {{ form.needs_artist_list }}
+                            <p>Looking for a graphics artist to:</p>
+                            <p class="inplace">
+                                {{ form.artist_description }}
+                                {{ form.artist_description.label_tag }}
                             </p>
                         </div>
                         
                         <hr />
                         
                         <div class="looking_for_programmer">
-                            <div class="looking_for_checkbox"
-                                    <!--<input type="checkbox" name="looking_for_artist" id="looking_for_artist" />-->
-                                    <!--Looking for a graphics artist to:-->
-                                    
-                                    {{ form.needs_developer }}
-                                    {{ form.needs_developer.label_tag }}
-                            </div>
-                            
-                            <p id="project_artist" class="inplace">
-                                    <!--<label for="project_artist_description">List of things you'd like the graphic artist to do.</label>-->
-                                    <!--<textarea name="project_artist_description" id="project_artist_description" rows="2"></textarea>-->
-                                    
-                                    {{ form.needs_developer_list.label_tag }}
-                                    {{ form.needs_developer_list }}
+                            <p>Looking for a programmer to:</p>
+                            <p class="inplace">
+                                {{ form.developer_description }}
+                                {{ form.developer_description.label_tag }}
                             </p>
                         </div>
                         
                         <hr />
                         
                         <div class="looking_for_copywriter">
-                            <div class="looking_for_checkbox"
-                                    <!--<input type="checkbox" name="looking_for_artist" id="looking_for_artist" />-->
-                                    <!--Looking for a graphics artist to:-->
-                                    
-                                    {{ form.needs_copywriter }}
-                                    {{ form.needs_copywriter.label_tag }}
-                            </div>
-                            
-                            <p id="project_artist" class="inplace">
-                                    <!--<label for="project_artist_description">List of things you'd like the graphic artist to do.</label>-->
-                                    <!--<textarea name="project_artist_description" id="project_artist_description" rows="2"></textarea>-->
-                                    
-                                    {{ form.needs_copywriter_list.label_tag }}
-                                    {{ form.needs_copywriter_list }}
+                            <p>Looking for a copywriter to:</p>
+                            <p class="inplace">
+                                {{ form.copywriter_description }}
+                                {{ form.copywriter_description.label_tag }}
                             </p>
                         </div>
                     </div>

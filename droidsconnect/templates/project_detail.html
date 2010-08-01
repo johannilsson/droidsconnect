@@ -55,7 +55,7 @@
             {% if project.needs_artist %}<div class="looking_for_artist">
                 <h2>Looking for a graphics artist to:</h2>
                 
-               {{ looking_for_artist_list }}
+               {{ project.artist_description }}
             </div>{% endif %}
             
             {% if project.needs_developer and project.needs_artist %}<hr />{% endif %}
@@ -63,7 +63,7 @@
             {% if project.needs_developer  %}<div class="looking_for_programmer">
                 <h2>Looking for a programmer to:</h2>
                 
-               {{ looking_for_developer_list }}
+               {{ project.developer_description }}
             </div>{% endif %}
             
             {% if project.needs_artist or project.needs_developer %}<hr />{% endif %}
@@ -71,7 +71,7 @@
             {% if project.needs_copywriter %}<div class="looking_for_copywriter">
                 <h2>Looking for a copywriter to:</h2>
                 
-               {{ looking_for_copywriter_list }}
+               {{ project.copywriter_description }}
             </div>{% endif %}
             
             <!--<hr />
