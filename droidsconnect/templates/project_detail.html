@@ -4,6 +4,9 @@
 
 {% block content %}
 
+{% if flash_message %}
+<p>{{ flash_message }}</p>
+{% endif %}
 
 <div id="project">
     <div id="content_header">
@@ -93,7 +96,7 @@
             <h1>Sounds like your cup of tea? Great!</h1>
             <h2>Use the form below to contact {{ project.owner.nickname }}.</h2>
             
-            <form>
+            <form method="post" action="{% url droidsconnect.project.views.contact project.key %}">
                 <p>
                     <label for="message_text">Message will be sent as an e-mail. Good luck!</label>
                     <textarea name="message_text" id="message_text" rows="4"></textarea>

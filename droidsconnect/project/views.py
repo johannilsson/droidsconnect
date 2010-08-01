@@ -2,14 +2,13 @@ from django import shortcuts
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.template import Context, loader, RequestContext
 from django.core.urlresolvers import reverse
-from google.appengine.api import users
+from google.appengine.api import users, images, mail
 from google.appengine.ext import db
-from google.appengine.api import images
 from droidsconnect.project.forms import ProjectForm
 from droidsconnect.project.models import Project
 import logging
 import markdown
-import django.http
+import flash
 
 def index(request):
     #q = db.GqlQuery("SELECT * FROM Project")
@@ -118,9 +117,13 @@ def detail(request, project_id):
 
     md = markdown.Markdown()
     description = md.convert(project.description)
+
+    flash_message = flash.Flash()
+
     template_values = {
         'project': project,
         'description': description,
+        'flash_message': flash_message.msg,
     }
 
     return shortcuts.render_to_response('project_detail.html', template_values,
@@ -141,3 +144,30 @@ def icon(request, project_id):
         raise Http404
 
     return response
+
+def contact(request, project_id):
+    user = users.get_current_user()
+    if user is None:
+        raise Http404
+    try:
+        key = db.Key(encoded=project_id)
+        q = db.GqlQuery("SELECT * FROM Project " +
+                    "WHERE __key__ = :1", key)
+        project = q.get()
+    except:
+        raise Http404
+
+    if request.method == 'POST':
+        message = request.POST.get('message_text')
+        sender_address = project.owner.email
+        subject = '%s want to help out with %s' % (project.owner.nickname, project.title)
+        body = """
+%s just sent you this message from Droids Connect;
+
+%s
+""" % (project.owner.nickname, message)
+        mail.send_mail(sender_address, user.email(), subject, body)
+
+        flash_message = flash.Flash()
+        flash_message.msg = 'Email was sent to the project owner!'
+        return HttpResponseRedirect(reverse('droidsconnect.project.views.detail', args=[str(project.key())]))
